@@ -27,5 +27,5 @@ jobs:
         with:
           username: nourch29
           password: taegiaf8910
-          repository: nourch29 / dockrep
+          repository: nourch29/dockrep
           tag_with_ref: true
