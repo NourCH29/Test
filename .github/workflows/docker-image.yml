@@ -25,7 +25,7 @@ jobs:
       - name: Push to Docker Hub
         uses: docker/build-push-action@v1
         with:
-          username: DOCKERHUB_USERNAME
+          username: nourch29
           password: DOCKERHUB_PASS
-          repository: DOCKERHUB_USERNAME/dockrep
+          repository: nourch29/dockrep
           tag_with_ref: true
