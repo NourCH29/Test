@@ -26,6 +26,6 @@ jobs:
         uses: docker/build-push-action@v1
         with:
           username: nourch29
-          password: secrets.DOCKERHUB_PASS
+          password: ${{secrets.DOCKERHUB_PASS}}
           repository: nourch29/dockrep
           tag_with_ref: true
