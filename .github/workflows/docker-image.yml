@@ -27,5 +27,5 @@ jobs:
         with:
           username: DOCKERHUB_USERNAME
           password: DOCKERHUB_PASS
-          repository: nourch29/dockrep
+          repository: DOCKERHUB_USERNAME/dockrep
           tag_with_ref: true
