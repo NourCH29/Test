@@ -44,3 +44,27 @@ jobs:
          echo "tenancy=${{secrets.OCI_TENANCY_OCID}}" >> ~/.oci/config
          echo "key_file=~/.oci/key.pem" >> ~/.oci/config
          echo "${{secrets.OCI_KEY_FILE}}" >> ~/.oci/key.pem
+         
+      - name: 'Install OCI CLI'
+        run: |
+         curl -L -O https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
+         chmod +x install.sh
+         ./install.sh --accept-all-defaults
+         echo "::add-path::/home/runner/bin"
+         exec -l $SHELL
+         
+      - name: 'Fix Config File Permissions'
+        run: |
+         oci setup repair-file-permissions --file /home/runner/.oci/config
+         oci setup repair-file-permissions --file /home/runner/.oci/key.pem
+         
+     
+      - name: 'Deploy the API on OKE'
+        run: |
+         kubectl delete deployment $DEPLOYMENT_NAME
+         kubectl create deployment $DEPLOYMENT_NAME --image=$IMAGE_NAME --dry-run -o yaml > deployment.yaml
+         kubectl apply -f deployment.yaml
+         kubectl rollout status deployment/$DEPLOYMENT_NAME
+         kubectl create service loadbalancer $DEPLOYMENT_NAME --tcp=80:$PORT --dry-run -o yaml > service.yaml
+         kubectl apply -f service.yaml
+         kubectl get services -o wide
