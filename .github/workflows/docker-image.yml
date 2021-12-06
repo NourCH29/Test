@@ -20,23 +20,13 @@ jobs:
     - uses: actions/checkout@v2
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag docker_push
-    - name: log untrusted output
-      run: |
-
-        # disable command workflow processing
-        echo "::stop-commands::`echo -n ${{ github.token }} | sha256sum | head -c 64`"
-
-        # log untrusted output
-        echo "untrusted output"
-
-        # enable workflow command processing
-        echo "::`echo -n ${{ github.token }} | sha256sum | head -c 64`::"
+    
   push_to_registry:
     name: Push Docker image to Docker Hub
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.273.1
       - name: Push to Docker Hub
         uses: docker/build-push-action@v2
         with:
@@ -57,6 +47,8 @@ jobs:
          echo "${{secrets.OCI_KEY_FILE}}" >> ~/.oci/key.pem
          
       - name: 'Install OCI CLI'
+        env:
+         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
         run: |
          curl -L -O https://raw.githubusercontent.com/oracle/oci-cli/master/scripts/install/install.sh
          chmod +x install.sh
