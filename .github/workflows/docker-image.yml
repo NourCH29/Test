@@ -62,6 +62,8 @@ jobs:
          oci setup repair-file-permissions --file /home/runner/.oci/key.pem
          
       - name: 'Download the KUBECONFIG'
+        env:
+         ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
         run: |
          mkdir -p ~/.kube
          oci ce cluster create-kubeconfig --cluster-id ${{ secrets.OKE_OCID }} --file ~/.kube/config --region ${{secrets.OCI_REGION}} --token-version 2.0.0 
