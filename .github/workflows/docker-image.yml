@@ -64,7 +64,7 @@ jobs:
       - name: 'Download the KUBECONFIG'
         run: |
          mkdir -p ~/.kube
-         oci ce cluster create-kubeconfig --cluster-id ${{ secrets.OKE_OCID }} --file ~/.kube/config --region ${{secrets.OCI_REGION}} --token-version 2.0.0 
+         oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.eu-marseille-1.aaaaaaaanuebahwxtgg6bnje5m3imeigmi4wfhlzeieph553fcknpbdsjlza --file ~/.kube/config --region ${{secrets.OCI_REGION}} --token-version 2.0.0 
          export KUBECONFIG=~/.kube/config
          
       - name: 'Deploy the API on OKE'
