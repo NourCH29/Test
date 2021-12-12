@@ -65,7 +65,7 @@ jobs:
         run: |
          mkdir -p ~/.kube
          oci ce cluster create-kubeconfig --cluster-id ${{ secrets.OKE_OCID }} --file ~/.kube/config --region ${{secrets.OCI_REGION}} --token-version 2.0.0 
-         export KUBECONFIG=~/.kube/config
+         export KUBECONFIG=$HOME/.kube/config
          
       - name: 'Deploy the API on OKE'
         run: |
