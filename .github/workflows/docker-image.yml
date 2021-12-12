@@ -59,11 +59,12 @@ jobs:
          
       - name: 'Download the KUBECONFIG'
         run: |
+         mkdir -p ~/.kube
+         oci ce cluster create-kubeconfig --cluster-id ${{ secrets.OKE_OCID }} --file ~/.kube/config --region ${{secrets.OCI_REGION}} --token-version 2.0.0 
          export KUBECONFIG=~/.kube/config
          
       - name: 'Deploy the API on OKE'
         run: |
-         oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.eu-marseille-1.aaaaaaaaadbgyaenzbovqta5j5bxli2yac67rldywapsaaxhmchp2v4e6rcq --file $HOME/.kube/config --region eu-marseille-1 --token-version 2.0.0  --kube-endpoint PUBLIC_ENDPOINT
          kubectl delete deployment $DEPLOYMENT_NAME
          kubectl create deployment $DEPLOYMENT_NAME --image=$IMAGE_NAME --dry-run -o yaml > deployment.yaml
          kubectl apply -f deployment.yaml
