@@ -57,7 +57,11 @@ jobs:
          oci setup repair-file-permissions --file /home/runner/.oci/config
          oci setup repair-file-permissions --file /home/runner/.oci/key.pem
          
-      
+      - name: 'Download the KUBECONFIG'
+        run: |
+         mkdir -p ~/.kube
+         oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.eu-marseille-1.aaaaaaaaadbgyaenzbovqta5j5bxli2yac67rldywapsaaxhmchp2v4e6rcq --file $HOME/.kube/config --region eu-marseille-1 --token-version 2.0.0  --kube-endpoint PUBLIC_ENDPOINT
+         export KUBECONFIG=~/.kube/config
          
       - name: 'Deploy the API on OKE'
         run: |
