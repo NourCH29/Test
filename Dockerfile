@@ -1,2 +1,2 @@
 FROM nginx 
-COPY ./hello.html waelhlali21/docker_push:tagname
+COPY ./hello.html linuxserver/nginx
