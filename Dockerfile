@@ -1,5 +1,5 @@
 FROM nginx 
-COPY ./hello.html linuxserver/nginx
+COPY ./hello.html nourch29/dockrep:tagname
 
 RUN apt-get update -y &&\ 
 addgroup --system app &&\
