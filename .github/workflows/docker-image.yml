@@ -62,6 +62,7 @@ jobs:
         run: |
          oci setup repair-file-permissions --file /home/runner/.oci/config
          oci setup repair-file-permissions --file /home/runner/.oci/key.pem
+         oci iam user get --user-id ${{secrets.OCI_USER_OCID}}
          
       - name: 'Download the KUBECONFIG'
         run: |
