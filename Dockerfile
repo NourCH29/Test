@@ -1,3 +1,2 @@
 FROM nginx 
-COPY ./index.html nourch29/dockrep:tagname
-
+COPY ./index.html /user/share/nginx/html
