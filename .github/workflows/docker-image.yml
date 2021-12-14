@@ -10,7 +10,7 @@ env:
   ACTIONS_ALLOW_UNSECURE_COMMANDS: true
   IMAGE_NAME: linuxserver/nginx:latest
   DEPLOYMENT_NAME: dockrep
-  PORT: 8080
+  PORT: 5000 
   
 jobs:
 
